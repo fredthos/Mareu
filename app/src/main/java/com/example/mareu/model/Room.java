@@ -6,7 +6,7 @@ public class Room {
     private String mRoomName;
     private int mRoomDesign;
 
-    public Room(long i, String RoomName, int RoomDesign) {
+    public Room(long id, String RoomName, int RoomDesign) {
         this.id = id;
         this.mRoomName = RoomName;
         this.mRoomDesign = RoomDesign;

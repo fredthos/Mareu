@@ -6,32 +6,26 @@ import java.util.Objects;
 public class Meeting {
 
     private long RoomId;
-    private String mMeetingSubject;
-    private String mMeetingDay;
+    private String mMeetingDate;
     private long mMeetingStart;
     private long mMeetingEnd;
     private List<String> mMeetingParticipants;
 
-    public Meeting(long Roomid, String meetingSubject, String meetingDay, long meetingStart,
+    public Meeting(long RoomId, String meetingObject, String meetingDate, long meetingStart,
                    long meetingEnd, List<String> MeetingParticipantsString) {
-        this.RoomId = Roomid;
-        this.mMeetingSubject = meetingSubject;
-        this.mMeetingDay = meetingDay;
+        this.RoomId = RoomId;
+        this.mMeetingDate = meetingDate;
         this.mMeetingStart = meetingStart;
         this.mMeetingEnd = meetingEnd;
         this.mMeetingParticipants = MeetingParticipantsString;
     }
 
     public long getRoomId() {
-        return RoomId;
+        return this.RoomId;
     }
 
-    public String getMeetingSubject() {
-        return mMeetingSubject;
-    }
-
-    public String getMeetingDay() {
-        return mMeetingDay;
+    public String getMeetingDate() {
+        return mMeetingDate;
     }
 
     public long getMeetingStart() {
@@ -54,8 +48,7 @@ public class Meeting {
         return RoomId == meeting.RoomId &&
                 mMeetingStart == meeting.mMeetingStart &&
                 mMeetingEnd == meeting.mMeetingEnd &&
-                Objects.equals(mMeetingSubject, meeting.mMeetingSubject) &&
-                Objects.equals(mMeetingDay, meeting.mMeetingDay) &&
+                Objects.equals(mMeetingDate, meeting.mMeetingDate) &&
                 Objects.equals(mMeetingParticipants, meeting.mMeetingParticipants);
     }
 

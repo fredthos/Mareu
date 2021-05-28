@@ -18,6 +18,11 @@ public class DummyMeetingRepository implements MeetingRepository {
     }
 
     @Override
+    public Room getRoomsById(long roomId) {
+        return null;
+    }
+
+    @Override
     public List<Meeting> getMeetings() {
         return mMeetings;
 

@@ -13,10 +13,13 @@ public interface MeetingRepository {
      */
     List<Room> getRooms();
 
+    Room getRoomsById(long roomId);
+
     /**
      * Get Meeting
      * @return the list of meetings
      */
     List<Meeting> getMeetings();
+
 
 }
