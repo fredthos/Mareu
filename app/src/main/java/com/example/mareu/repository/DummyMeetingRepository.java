@@ -8,17 +8,22 @@ import java.util.List;
 
 public class DummyMeetingRepository implements MeetingRepository {
 
-    private List<Room> Rooms = DummyMeetingGenerator.generateRooms();
+    private List<Room> mRooms = DummyMeetingGenerator.generateRooms();
     private List<Meeting> mMeetings = new ArrayList<>();
 
 
     @Override
     public List<Room> getRooms() {
-        return Rooms;
+        return mRooms;
     }
 
     @Override
-    public Room getRoomsById(long roomId) {
+    public Room getRoomById(long roomId) {
+        for (int i = 0; i < mRooms.size(); i++) {
+            if (roomId == mRooms.get(i).getId()) {
+                return mRooms.get(i);
+            }
+        }
         return null;
     }
 

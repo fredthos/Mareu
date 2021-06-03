@@ -13,7 +13,7 @@ public interface MeetingRepository {
      */
     List<Room> getRooms();
 
-    Room getRoomsById(long roomId);
+    Room getRoomById(long roomId);
 
     /**
      * Get Meeting

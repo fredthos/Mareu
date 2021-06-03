@@ -6,17 +6,19 @@ import java.util.Objects;
 public class Meeting {
 
     private long RoomId;
+    private final String mMeetingSubject;
     private String mMeetingDate;
-    private long mMeetingStart;
-    private long mMeetingEnd;
+    private long mMeetingStartTime;
+    private long mMeetingEndTime;
     private List<String> mMeetingParticipants;
 
-    public Meeting(long RoomId, String meetingObject, String meetingDate, long meetingStart,
-                   long meetingEnd, List<String> MeetingParticipantsString) {
+    public Meeting(long RoomId, String meetingSubject, String meetingDate, long meetingStartTime,
+                   long meetingEndTime, List<String> MeetingParticipantsString) {
         this.RoomId = RoomId;
+        this.mMeetingSubject = meetingSubject;
         this.mMeetingDate = meetingDate;
-        this.mMeetingStart = meetingStart;
-        this.mMeetingEnd = meetingEnd;
+        this.mMeetingStartTime = meetingStartTime;
+        this.mMeetingEndTime = meetingEndTime;
         this.mMeetingParticipants = MeetingParticipantsString;
     }
 
@@ -28,12 +30,12 @@ public class Meeting {
         return mMeetingDate;
     }
 
-    public long getMeetingStart() {
-        return mMeetingStart;
+    public long getMeetingStartTime() {
+        return mMeetingStartTime;
     }
 
-    public long getMeetingEnd() {
-        return mMeetingEnd;
+    public long getMeetingEndTime() {
+        return mMeetingEndTime;
     }
 
     public List<String> getMeetingParticipants() {
@@ -46,8 +48,8 @@ public class Meeting {
         if (o == null || getClass() != o.getClass()) return false;
         Meeting meeting = (Meeting) o;
         return RoomId == meeting.RoomId &&
-                mMeetingStart == meeting.mMeetingStart &&
-                mMeetingEnd == meeting.mMeetingEnd &&
+                mMeetingStartTime == meeting.mMeetingStartTime &&
+                mMeetingEndTime == meeting.mMeetingEndTime &&
                 Objects.equals(mMeetingDate, meeting.mMeetingDate) &&
                 Objects.equals(mMeetingParticipants, meeting.mMeetingParticipants);
     }

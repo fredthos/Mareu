@@ -1,7 +1,5 @@
 package com.example.mareu.ui;
 
-import android.graphics.drawable.Drawable;
-import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,6 @@ import com.example.mareu.model.Meeting;
 import com.example.mareu.model.Room;
 import com.example.mareu.repository.MeetingRepository;
 
-import java.util.EventListener;
 import java.util.List;
 
 import static androidx.appcompat.content.res.AppCompatResources.getDrawable;
@@ -45,10 +42,9 @@ public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeeting
     @Override
     public void onBindViewHolder(@NonNull MeetingViewHolder holder, int position) {
         Meeting currentMeeting = mMeetings.get(position);
-        Room currentRoom = mRepository.getRoomsById(currentMeeting.getRoomId());
+        Room currentRoom = mRepository.getRoomById(currentMeeting.getRoomId());
         holder.mMeetingRoomDesign.setImageDrawable(getDrawable(holder.mMeetingRoomName.getContext(), currentRoom.getRoomDesign()));
         holder.mMeetingRoomName.setText(currentRoom.getRoomName());
-        holder.mMeetingDate.setText("");
         holder.mMeetingParticipants.setText(currentMeeting.getMeetingParticipants().toString());
 
         holder.mMeetingDelete.setOnClickListener(new View.OnClickListener() {
