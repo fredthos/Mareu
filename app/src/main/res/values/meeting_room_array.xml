@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="meeting_room_array" >
+        <item>cactus</item>
+        <item>caipirinha</item>
+        <item>cubalibre</item>
+        <item>daiquiri</item>
+        <item>maitai</item>
+        <item>mojito</item>
+        <item>pinacolada</item>
+        <item>planteur</item>
+        <item>tipunch</item>
+    </string-array>
+</resources>

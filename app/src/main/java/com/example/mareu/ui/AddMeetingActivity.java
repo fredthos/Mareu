@@ -32,6 +32,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     private TextInputEditText mMeetingParticipants;
     private Button mCreate;
     private Spinner mDurationSpinner;
+    private Spinner mRoomSpinner;
 
     private MeetingRepository mRepository;
     private Calendar mStartCalendar;
@@ -52,12 +53,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         mMeetingParticipants = findViewById(R.id.meeting_participants);
         mCreate = findViewById(R.id.create);
         mDurationSpinner = findViewById(R.id.meeting_duration_spinner);
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
-                (this, R.array.meeting_durations_array, R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        mDurationSpinner.setAdapter(adapter);
-        mDurationSpinner.setOnItemSelectedListener(this);
+        mRoomSpinner = findViewById(R.id.meeting_room_spinner);
 
         mMeetingDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +68,17 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                (this, R.array.meeting_durations_array, R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        mDurationSpinner.setAdapter(adapter);
+        mDurationSpinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource
+                (this, R.array.meeting_room_array, R.layout.support_simple_spinner_dropdown_item);
+        adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        mRoomSpinner.setAdapter(adapter1);
+        mRoomSpinner.setOnItemSelectedListener(this);
     }
 
     private void showDateDialog(EditText date) {
@@ -120,7 +127,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
 

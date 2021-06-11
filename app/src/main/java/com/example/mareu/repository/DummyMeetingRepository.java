@@ -9,7 +9,7 @@ import java.util.List;
 public class DummyMeetingRepository implements MeetingRepository {
 
     private List<Room> mRooms = DummyMeetingGenerator.generateRooms();
-    private List<Meeting> mMeetings = new ArrayList<>();
+    private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeeting();
 
 
     @Override

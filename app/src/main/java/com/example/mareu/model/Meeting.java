@@ -7,26 +7,30 @@ public class Meeting {
 
     private long RoomId;
     private final String mMeetingSubject;
-    private String mMeetingDate;
+    private double mMeetingDate;
     private long mMeetingStartTime;
     private long mMeetingEndTime;
-    private List<String> mMeetingParticipants;
+    private String mMeetingParticipants;
 
-    public Meeting(long RoomId, String meetingSubject, String meetingDate, long meetingStartTime,
-                   long meetingEndTime, List<String> MeetingParticipantsString) {
+    public Meeting(long RoomId, String meetingSubject, double meetingDate, long meetingStartTime,
+                   long meetingEndTime, String MeetingParticipants) {
         this.RoomId = RoomId;
         this.mMeetingSubject = meetingSubject;
         this.mMeetingDate = meetingDate;
         this.mMeetingStartTime = meetingStartTime;
         this.mMeetingEndTime = meetingEndTime;
-        this.mMeetingParticipants = MeetingParticipantsString;
+        this.mMeetingParticipants = MeetingParticipants;
     }
 
     public long getRoomId() {
         return this.RoomId;
     }
 
-    public String getMeetingDate() {
+    public String getMeetingSubject() {
+        return mMeetingSubject;
+    }
+
+    public double getMeetingDate() {
         return mMeetingDate;
     }
 
@@ -38,7 +42,7 @@ public class Meeting {
         return mMeetingEndTime;
     }
 
-    public List<String> getMeetingParticipants() {
+    public String getMeetingParticipants() {
         return mMeetingParticipants;
     }
 

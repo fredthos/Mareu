@@ -93,15 +93,20 @@ public class MeetingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initList();
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        //EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        //EventBus.getDefault().unregister(this);
     }
+
+
 }
