@@ -6,44 +6,68 @@ import java.util.Objects;
 public class Meeting {
 
     private long RoomId;
-    private final String mMeetingSubject;
-    private double mMeetingDate;
-    private long mMeetingStartTime;
-    private long mMeetingEndTime;
-    private String mMeetingParticipants;
+    private String mMeetingSubject;
+    private String mMeetingDate;
+    private String mMeetingStartTime;
+    private String mMeetingDuration;
+    private List<String> mMeetingParticipants;
 
-    public Meeting(long RoomId, String meetingSubject, double meetingDate, long meetingStartTime,
-                   long meetingEndTime, String MeetingParticipants) {
+    public Meeting(int RoomId, String meetingSubject, String meetingDate, String meetingStartTime,
+                   String meetingDuration, List<String> MeetingParticipants) {
         this.RoomId = RoomId;
         this.mMeetingSubject = meetingSubject;
         this.mMeetingDate = meetingDate;
         this.mMeetingStartTime = meetingStartTime;
-        this.mMeetingEndTime = meetingEndTime;
+        this.mMeetingDuration = meetingDuration;
         this.mMeetingParticipants = MeetingParticipants;
     }
 
     public long getRoomId() {
-        return this.RoomId;
+        return RoomId;
+    }
+
+    public void setRoomId(long roomId) {
+        this.RoomId = roomId;
     }
 
     public String getMeetingSubject() {
         return mMeetingSubject;
     }
 
-    public double getMeetingDate() {
+    public void setMeetingSubject(String meetingTopic) {
+        this.mMeetingSubject = mMeetingSubject;
+    }
+
+    public String getMeetingDate() {
         return mMeetingDate;
     }
 
-    public long getMeetingStartTime() {
+    public void setMeetingDate(String meetingDate) {
+        this.mMeetingDate = meetingDate;
+    }
+
+    public String getMeetingStartTime() {
         return mMeetingStartTime;
     }
 
-    public long getMeetingEndTime() {
-        return mMeetingEndTime;
+    public void setMeetingStartTime(String meetingStartTime) {
+        this.mMeetingStartTime = meetingStartTime;
     }
 
-    public String getMeetingParticipants() {
+    public String getMeetingDuration() {
+        return mMeetingDuration;
+    }
+
+    public void setMeetingDuration(String  meetingDuration) {
+        this.mMeetingDuration = meetingDuration;
+    }
+
+    public List<String> getMeetingParticipants() {
         return mMeetingParticipants;
+    }
+
+    public void setMeetingParticipants(List<String> meetingParticipants) {
+        this.mMeetingParticipants = meetingParticipants;
     }
 
     @Override
@@ -51,12 +75,11 @@ public class Meeting {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Meeting meeting = (Meeting) o;
-        return RoomId == meeting.RoomId &&
-                mMeetingStartTime == meeting.mMeetingStartTime &&
-                mMeetingEndTime == meeting.mMeetingEndTime &&
-                Objects.equals(mMeetingDate, meeting.mMeetingDate) &&
-                Objects.equals(mMeetingParticipants, meeting.mMeetingParticipants);
+        return Objects.equals(RoomId, meeting.RoomId);
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(RoomId);
+    }
 }

@@ -18,4 +18,8 @@ public class DI {
         return repository;
     }
 
+    public static MeetingRepository getNewInstanceMeetingRepository() {
+        return new DummyMeetingRepository();
+    }
+
 }

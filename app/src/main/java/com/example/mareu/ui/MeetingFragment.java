@@ -16,7 +16,10 @@ import android.view.ViewGroup;
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.Room;
 import com.example.mareu.repository.MeetingRepository;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -38,35 +41,6 @@ public class MeetingFragment extends Fragment {
         return fragment;
     }
 
-    //private static final String ARG_PARAM1 = "param1";
-    //private static final String ARG_PARAM2 = "param2";
-
-
-    // TODO: Rename and change types of parameters
-    //private String mParam1;
-    //private String mParam2;
-
-    //public MeetingFragment() {
-        // Required empty public constructor
-    //}
-
-    ///**
-     //* Use this factory method to create a new instance of
-     //* this fragment using the provided parameters.
-     //*
-     //* @param param1 Parameter 1.
-     //* @param param2 Parameter 2.
-     //* @return A new instance of fragment MeetingFragment.
-     //*/
-    // TODO: Rename and change types and number of parameters
-    //public static MeetingFragment newInstance(String param1, String param2) {
-       //MeetingFragment fragment = new MeetingFragment();
-        //Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
-        //fragment.setArguments(args);
-        //return fragment;
-    //}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +63,7 @@ public class MeetingFragment extends Fragment {
     public void initList() {
         mMeetings = mRepository.getMeetings();
         mRecyclerView.setAdapter(new MyMeetingRecyclerViewAdapter(mMeetings));
+
     }
     @Override
     public void onResume() {
@@ -99,13 +74,13 @@ public class MeetingFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        //EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 
 

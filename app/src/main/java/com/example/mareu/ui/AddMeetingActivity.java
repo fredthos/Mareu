@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
+import com.example.mareu.model.Meeting;
 import com.example.mareu.repository.MeetingRepository;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -79,6 +80,12 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         mRoomSpinner.setAdapter(adapter1);
         mRoomSpinner.setOnItemSelectedListener(this);
+
+        //todo a modifier avec les differents champs OK pour create (2)
+        mCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {}
+        });
     }
 
     private void showDateDialog(EditText date) {
@@ -117,17 +124,19 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        mMeetingDurationMillis = (position + 1) * 15 * 60000;
-        Calendar mEndCalendar = Calendar.getInstance();
-        long meetingEndTimeMillis = mStartCalendar.getTimeInMillis() + mMeetingDurationMillis;
-        mEndCalendar.setTimeInMillis(meetingEndTimeMillis);
-        int booleanCompar = mStartCalendar.compareTo(mEndCalendar);
-        mMeetingRoom.setText("");
+       mMeetingDurationMillis = (position + 1) * 15 * 60000;
+       Calendar mEndCalendar = Calendar.getInstance();
+       long meetingEndTimeMillis = mStartCalendar.getTimeInMillis() + mMeetingDurationMillis;
+       mEndCalendar.setTimeInMillis(meetingEndTimeMillis);
+       int booleanCompar = mStartCalendar.compareTo(mEndCalendar);
+       mMeetingRoom.setText("");
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
+
+
 
 
 }

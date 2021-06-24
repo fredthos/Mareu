@@ -7,6 +7,14 @@
     tools:context=".ui.MeetingListActivity">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/fragment_meeting"/>
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_meeting"
         android:layout_width="wrap_content"

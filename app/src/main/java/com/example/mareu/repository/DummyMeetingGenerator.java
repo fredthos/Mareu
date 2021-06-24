@@ -23,13 +23,27 @@ public abstract class DummyMeetingGenerator {
             new Room(10, "Brasilia", R.drawable.brasilia)
     );
 
-    public static List<Meeting> DUMMY_MEETING = Arrays.asList(
-            new Meeting(1, "Soutenance", 10.06,
-                    10, 11, "maxime@lamzone.com" + "alex@lamzone.com"),
-            new Meeting(5, "Reunion d'equipe", 12.06,
-                    7, 10, "viviane@lamzone.com" + "seb@lamzone.com"),
-            new Meeting(8, "Reunion d'information", 15.06,
-                    8, 9, "guillaume@lamzone.com" + "fabien@lamzone.com")
+    public static List<Meeting> DUMMY_FAKE_MEETING = Arrays.asList(
+            new Meeting(1, "Soutenance", "10/06/2021",
+                    "10:00", "1h", Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com")),
+            new Meeting(5, "Reunion d'equipe", "12/06/2021",
+                    "8:00", "30min", Arrays.asList("jack@lamzone.com","viviane@lamzone.com","seb@lamzone.com","achraf@lamzone.com")),
+            new Meeting(8, "Reunion d'information", "15/06/2021",
+                    "11:00", "1h30", Arrays.asList("denis@lamzone.com","marie@lamzone.com","sophie@lamzone.com","milena@lamzone.com")),
+            new Meeting(2, "Soutenance", "20/06/2021",
+                    "15:00", "15min", Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com")),
+            new Meeting(6, "Reunion d'equipe", "22/06/2021",
+                    "18:00", "45min", Arrays.asList("jack@lamzone.com","viviane@lamzone.com","seb@lamzone.com","achraf@lamzone.com")),
+            new Meeting(9, "Reunion d'information", "25/06/2021",
+                    "12:00", "1h15", Arrays.asList("denis@lamzone.com","marie@lamzone.com","sophie@lamzone.com","milena@lamzone.com")),
+            new Meeting(3, "Soutenance", "28/06/2021",
+                    "6:00", "1h", Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com")),
+            new Meeting(7, "Reunion d'equipe", "16/06/2021",
+                    "7:30", "30min", Arrays.asList("jack@lamzone.com","viviane@lamzone.com","seb@lamzone.com","achraf@lamzone.com")),
+            new Meeting(10, "Reunion d'information", "15/06/2021",
+                    "10:30", "1h30", Arrays.asList("denis@lamzone.com","marie@lamzone.com","sophie@lamzone.com","milena@lamzone.com")),
+            new Meeting(4, "Soutenance", "11/06/2021",
+                    "13:00", "1h", Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com"))
     );
 
     static List<Room> generateRooms() {
@@ -37,6 +51,6 @@ public abstract class DummyMeetingGenerator {
     }
 
     static List<Meeting> generateMeeting() {
-      return new ArrayList<>(DUMMY_MEETING);
+      return new ArrayList<>(DUMMY_FAKE_MEETING);
     }
 }

@@ -21,5 +21,16 @@ public interface MeetingRepository {
      */
     List<Meeting> getMeetings();
 
+    /**
+     * Delete Meeting
+     * @param meeting delete meeting
+     */
+    void deleteMeeting(Meeting meeting);
 
+
+    /**
+     * Delete Meeting
+     * @param meeting create meeting
+     */
+    void createMeeting(Meeting meeting);
 }

@@ -32,4 +32,25 @@ public class DummyMeetingRepository implements MeetingRepository {
         return mMeetings;
 
     }
+
+    /**
+     * Delete Meeting
+     *
+     * @param meeting delete meeting
+     */
+    @Override
+    public void deleteMeeting(Meeting meeting) {
+        mMeetings.remove(meeting);
+    }
+
+    /**
+     * Delete Meeting
+     *
+     * @param meeting create meeting
+     */
+    @Override
+    public void createMeeting(Meeting meeting) {
+        mMeetings.add(meeting);
+
+    }
 }
