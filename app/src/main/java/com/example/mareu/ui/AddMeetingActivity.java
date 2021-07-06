@@ -16,45 +16,58 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
-import com.example.mareu.model.Meeting;
 import com.example.mareu.repository.MeetingRepository;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import butterknife.BindView;
+
 public class AddMeetingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private TextInputEditText mMeetingSubject;
-    private TextInputEditText mMeetingDate;
-    private TextInputEditText mMeetingTime;
-    private TextInputEditText mMeetingDuration;
-    private TextInputEditText mMeetingRoom;
-    private TextInputEditText mMeetingParticipants;
-    private Button mCreate;
-    private Spinner mDurationSpinner;
-    private Spinner mRoomSpinner;
+    @BindView(R.id.meeting_subject)
+    TextInputEditText mMeetingSubject;
+    @BindView(R.id.filter_date)
+    TextInputEditText mMeetingDate;
+    @BindView(R.id.meeting_time)
+    TextInputEditText mMeetingTime;
+    @BindView(R.id.meeting_duration)
+    TextInputEditText mMeetingDuration;
+    @BindView(R.id.meeting_room_name)
+    TextInputEditText mMeetingRoom;
+    @BindView(R.id.meeting_participants)
+    TextInputEditText mMeetingParticipants;
+    @BindView(R.id.create_meeting)
+    Button mCreateMeeting;
+    @BindView(R.id.meeting_duration_spinner)
+    Spinner mDurationSpinner;
+    @BindView(R.id.meeting_room_spinner)
+    Spinner mRoomSpinner;
+    @BindView(R.id.create)
+    Button mCreate;
 
     private MeetingRepository mRepository;
     private Calendar mStartCalendar;
     private int mMeetingDurationMillis;
 
+    //todo initialisation creation meeting (1)
+    private String meetingSubject;
+    private String meetingDate;
+    private String meetingTime;
+    private String meetingDuration = "15min";
+    private String meetingRoom = "cactus";
+    private String meetingParticipants;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
+        modifVars();
 
         mRepository = DI.getMeetingRepository();
         mStartCalendar = Calendar.getInstance();
-
-        mMeetingDate = findViewById(R.id.meeting_date);
-        mMeetingTime = findViewById(R.id.meeting_time);
-        mMeetingDuration = findViewById(R.id.meeting_duration);
-        mMeetingRoom = findViewById(R.id.meeting_room_name);
-        mMeetingParticipants = findViewById(R.id.meeting_participants);
-        mCreate = findViewById(R.id.create);
-        mDurationSpinner = findViewById(R.id.meeting_duration_spinner);
-        mRoomSpinner = findViewById(R.id.meeting_room_spinner);
 
         mMeetingDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +94,18 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         mRoomSpinner.setAdapter(adapter1);
         mRoomSpinner.setOnItemSelectedListener(this);
 
-        //todo a modifier avec les differents champs OK pour create (2)
+        //todo a modifier avec les differents champs OK pour create (3)
+
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {}
+            public void onClick(View v) {
+                mMeetingSubject.getText().toString();
+                if (mMeetingSubject.getText().toString() != null) ;
+            }
         });
     }
 
+    // DatePicker
     private void showDateDialog(EditText date) {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -105,6 +123,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
                 (AddMeetingActivity.this, dateSetListener, mStartCalendar.get(Calendar.YEAR), mStartCalendar.get(Calendar.MONTH), mStartCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    // TimePicker
     private void showTimeDialog(EditText time) {
         TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -121,22 +140,25 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       mMeetingDurationMillis = (position + 1) * 15 * 60000;
-       Calendar mEndCalendar = Calendar.getInstance();
-       long meetingEndTimeMillis = mStartCalendar.getTimeInMillis() + mMeetingDurationMillis;
-       mEndCalendar.setTimeInMillis(meetingEndTimeMillis);
-       int booleanCompar = mStartCalendar.compareTo(mEndCalendar);
-       mMeetingRoom.setText("");
+        mMeetingDurationMillis = (position + 1) * 15 * 60000;
+        Calendar mEndCalendar = Calendar.getInstance();
+        long meetingEndTimeMillis = mStartCalendar.getTimeInMillis() + mMeetingDurationMillis;
+        mEndCalendar.setTimeInMillis(meetingEndTimeMillis);
+        int booleanCompar = mStartCalendar.compareTo(mEndCalendar);
+        mMeetingRoom.setText("");
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
+    //todo modification des variables (2)
+    private void modifVars() {
 
+
+    }
 
 
 }

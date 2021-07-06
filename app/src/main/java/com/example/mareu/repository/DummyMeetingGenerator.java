@@ -42,7 +42,7 @@ public abstract class DummyMeetingGenerator {
                     "7:30", "30min", Arrays.asList("jack@lamzone.com","viviane@lamzone.com","seb@lamzone.com","achraf@lamzone.com")),
             new Meeting(10, "Reunion d'information", "15/06/2021",
                     "10:30", "1h30", Arrays.asList("denis@lamzone.com","marie@lamzone.com","sophie@lamzone.com","milena@lamzone.com")),
-            new Meeting(4, "Soutenance", "11/06/2021",
+            new Meeting(4, "Soutenance", "10/06/2021",
                     "13:00", "1h", Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com"))
     );
 

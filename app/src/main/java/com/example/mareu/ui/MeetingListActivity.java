@@ -9,19 +9,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.Room;
 import com.example.mareu.repository.DummyMeetingGenerator;
 import com.example.mareu.repository.MeetingRepository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -30,6 +36,7 @@ public class MeetingListActivity extends AppCompatActivity {
     private FloatingActionButton mCreateMeetingBtn;
 
     private List<Meeting> mFakeMeeting;
+    private List<Room> mFakeRoom;
     private MeetingRepository mMeetingRepository;
     private RecyclerView mRecyclerView;
     private MyMeetingRecyclerViewAdapter mMyMeetingRecyclerViewAdapter;
@@ -72,11 +79,9 @@ public class MeetingListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_meeting);
 
         mMeetingRepository = DI.getMeetingRepository();
-        mRecyclerView=findViewById(R.id.recycler_view_meeting);
+        mRecyclerView = findViewById(R.id.recycler_view_meeting);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mFakeMeeting = DummyMeetingGenerator.DUMMY_FAKE_MEETING;
-        mMyMeetingRecyclerViewAdapter = new MyMeetingRecyclerViewAdapter(mFakeMeeting);
-        mRecyclerView.setAdapter(mMyMeetingRecyclerViewAdapter);
+        initList();
 
         mCreateMeetingBtn = findViewById(R.id.create_meeting);
         mCreateMeetingBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +91,33 @@ public class MeetingListActivity extends AppCompatActivity {
                 startActivity(addMeetingActivityIntent);
             }
         });
-
     }
+
+    public void initList() {
+        mFakeMeeting = mMeetingRepository.getMeetings();
+        mFakeRoom = mMeetingRepository.getRooms();
+        mMyMeetingRecyclerViewAdapter = new MyMeetingRecyclerViewAdapter(mFakeMeeting,mFakeRoom);
+        mRecyclerView.setAdapter(mMyMeetingRecyclerViewAdapter);
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onDeleteMeetingEvent (DeleteMeetingEvent event) {
+        Log.d("selection", "bouton selectionné");
+        mMeetingRepository.deleteMeeting(event.mMeeting);
+        initList();
+    }
+
 }

@@ -9,6 +9,6 @@
     android:layout_marginRight="15dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.MeetingFragment"
-    tools:listitem="@layout/fragment_meeting" />
+    tools:listitem="@layout/item_meeting" />
 
 
