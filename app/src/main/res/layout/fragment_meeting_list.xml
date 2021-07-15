@@ -8,7 +8,7 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.MeetingFragment"
+    tools:context=".ui.MeetingListActivity"
     tools:listitem="@layout/item_meeting" />
 
 

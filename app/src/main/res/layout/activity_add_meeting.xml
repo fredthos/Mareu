@@ -10,11 +10,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/meeting_create_lyt"
@@ -54,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:inputType="textEmailSubject"
                     android:hint="Object" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -179,7 +184,7 @@
                 android:id="@+id/meeting_participants_lyt"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -190,6 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:inputType="textEmailAddress"
                     android:hint="Participants" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -202,27 +208,26 @@
                 app:layout_constraintStart_toStartOf="@+id/meeting_participants_lyt"
                 app:layout_constraintTop_toBottomOf="@id/meeting_participants_lyt" />
 
-            <Button
-                android:id="@+id/create"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="125dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="125dp"
-                android:clickable="false"
-                android:elevation="15dp"
-                android:enabled="false"
-                android:text="créer"
-                android:textColor="@color/black"
-                app:cornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chip_group" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/create"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:clickable="false"
+        android:elevation="15dp"
+        android:enabled="false"
+        android:text="créer"
+        android:textColor="@color/black"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

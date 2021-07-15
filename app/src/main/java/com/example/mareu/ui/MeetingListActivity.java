@@ -1,11 +1,5 @@
 package com.example.mareu.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,15 +8,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.Room;
-import com.example.mareu.repository.DummyMeetingGenerator;
 import com.example.mareu.repository.MeetingRepository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,10 +41,10 @@ public class MeetingListActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater =getMenuInflater();
+        MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.option_menu, menu);
 
-        if (menu instanceof MenuBuilder){
+        if (menu instanceof MenuBuilder) {
             MenuBuilder m = (MenuBuilder) menu;
             m.setOptionalIconsVisible(true);
         }
@@ -64,13 +61,12 @@ public class MeetingListActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.filterByRoom, Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.reset:
-                Toast.makeText(this,R.string.resetFilter, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.resetFilter, Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     @Override
@@ -89,6 +85,7 @@ public class MeetingListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent addMeetingActivityIntent = new Intent(MeetingListActivity.this, AddMeetingActivity.class);
                 startActivity(addMeetingActivityIntent);
+                Log.d("open", "ouverture layout");
             }
         });
     }
@@ -96,10 +93,16 @@ public class MeetingListActivity extends AppCompatActivity {
     public void initList() {
         mFakeMeeting = mMeetingRepository.getMeetings();
         mFakeRoom = mMeetingRepository.getRooms();
-        mMyMeetingRecyclerViewAdapter = new MyMeetingRecyclerViewAdapter(mFakeMeeting,mFakeRoom);
+        mMyMeetingRecyclerViewAdapter = new MyMeetingRecyclerViewAdapter(mFakeMeeting, mFakeRoom);
         mRecyclerView.setAdapter(mMyMeetingRecyclerViewAdapter);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initList();
+    }
 
     @Override
     public void onStart() {
@@ -114,7 +117,7 @@ public class MeetingListActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void onDeleteMeetingEvent (DeleteMeetingEvent event) {
+    public void onDeleteMeetingEvent(DeleteMeetingEvent event) {
         Log.d("selection", "bouton selectionné");
         mMeetingRepository.deleteMeeting(event.mMeeting);
         initList();

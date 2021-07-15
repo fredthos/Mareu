@@ -44,7 +44,7 @@ public class DummyMeetingRepository implements MeetingRepository {
     }
 
     /**
-     * Delete Meeting
+     * Create Meeting
      *
      * @param meeting create meeting
      */
