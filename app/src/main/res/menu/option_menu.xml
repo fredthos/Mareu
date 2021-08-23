@@ -2,19 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="menu"
-        android:icon="@drawable/ic_baseline_menu_24"
-        app:showAsAction="ifRoom">
+    <item
+        android:id="@+id/menu_mareu"
+        android:title="Menu"
+        android:orderInCategory="100"
+        app:showAsAction="never">
 
         <menu>
             <item
-                android:id="@+id/filter_date"
+                android:id="@+id/Trier_date"
                 android:title="Date" />
             <item
-                android:id="@+id/filter_room"
+                android:id="@+id/Trer_room"
                 android:title="MeetingRoom"/>
             <item
-                android:id="@+id/reset"
+                android:id="@+id/Reset"
                 android:title="Reset list"/>
 
         </menu>

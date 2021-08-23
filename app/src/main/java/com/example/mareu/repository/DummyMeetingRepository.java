@@ -9,7 +9,7 @@ import java.util.List;
 public class DummyMeetingRepository implements MeetingRepository {
 
     private List<Room> mRooms = DummyMeetingGenerator.generateRooms();
-    private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeeting();
+    private List<Meeting> mMeetings = new ArrayList<>();
 
 
     @Override
@@ -51,6 +51,5 @@ public class DummyMeetingRepository implements MeetingRepository {
     @Override
     public void createMeeting(Meeting meeting) {
         mMeetings.add(meeting);
-
     }
 }

@@ -12,14 +12,20 @@ public class Meeting {
     private String mMeetingDuration;
     private List<String> mMeetingParticipants;
 
-    public Meeting(int meetingRoomId, String meetingSubject, String meetingDate, String meetingStartTime,
-                   String meetingDuration, List<String> MeetingParticipants) {
+    public Meeting(
+            long meetingRoomId,
+            String meetingSubject,
+            String meetingDate,
+            String meetingStartTime,
+            String meetingDuration,
+            List<String> meetingParticipants
+    ) {
         this.meetingRoomId = meetingRoomId;
-        this.mMeetingSubject = meetingSubject;
-        this.mMeetingDate = meetingDate;
-        this.mMeetingStartTime = meetingStartTime;
-        this.mMeetingDuration = meetingDuration;
-        this.mMeetingParticipants = MeetingParticipants;
+        mMeetingSubject = meetingSubject;
+        mMeetingDate = meetingDate;
+        mMeetingStartTime = meetingStartTime;
+        mMeetingDuration = meetingDuration;
+        mMeetingParticipants = meetingParticipants;
     }
 
     public long getMeetingRoomId() {

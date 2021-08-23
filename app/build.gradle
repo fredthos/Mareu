@@ -39,6 +39,7 @@ dependencies {
 
     // BINDING
     implementation 'com.jakewharton:butterknife:10.2.3'
+    implementation 'androidx.room:room-runtime:2.3.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     // EVENT BUS
@@ -51,4 +52,5 @@ dependencies {
     // INSTRUMENTATION TEST
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    annotationProcessor 'androidx.room:room-compiler:2.3.0'
 }

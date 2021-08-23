@@ -31,11 +31,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="68dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="center"
-                    android:text="CREATION D'UNE REUNION"
+                    android:text="@string/create_meeting_activity_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
                 android:id="@+id/meeting_subject_lyt"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="68dp"
                 android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,10 +56,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/meeting_subject"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:ems="10"
-                    android:inputType="textEmailSubject"
-                    android:hint="Object" />
+                    android:hint="@string/meeting_subject_hint"
+                    android:inputType="textEmailSubject" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -70,13 +70,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/meeting_subject_lyt">
-                >
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/meeting_date_lyt"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="195dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="12dp"
                     android:clickable="false"
                     android:focusable="false"
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/ic_edit_calendar_24"
                         android:focusable="false"
-                        android:hint="Date" />
+                        android:hint="@string/date_meeting_hint" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +98,7 @@
                     android:id="@+id/meeting_time_lyt"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="195dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="0dp"
                     android:clickable="false"
@@ -113,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/ic_time_24"
                         android:focusable="false"
-                        android:hint="Horaire" />
+                        android:hint="@string/duration_meeting_hint" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -122,8 +122,9 @@
                 android:id="@+id/meeting_duration_lyt"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="68dp"
                 android:layout_marginTop="12dp"
+                android:focusable="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/date_and_time_lyt">
@@ -131,29 +132,28 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/meeting_duration"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="10"
                     android:focusable="false"
-                    android:hint="Durée" />
+                    android:hint="@string/duration_meeting_input" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/meeting_duration_spinner"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="220dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="222dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="12dp"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="@+id/meeting_duration_lyt"
-                app:layout_constraintStart_toStartOf="@+id/meeting_duration_lyt"
-                app:layout_constraintTop_toBottomOf="@id/date_and_time_lyt" />
+                app:layout_constraintTop_toTopOf="@id/meeting_duration_lyt" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/meeting_room_name_lyt"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="68dp"
                 android:layout_marginTop="12dp"
-                android:clickable="false"
                 android:focusable="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,23 +162,22 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/meeting_room_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:ems="10"
                     android:focusable="false"
-                    android:hint="Salle" />
+                    android:hint="@string/room_meeting_spinner" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/meeting_room_spinner"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="220dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="222dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="12dp"
                 android:spinnerMode="dialog"
                 app:layout_constraintEnd_toEndOf="@+id/meeting_room_name_lyt"
-                app:layout_constraintStart_toStartOf="@id/meeting_room_name_lyt"
-                app:layout_constraintTop_toBottomOf="@id/meeting_duration_lyt" />
+                app:layout_constraintTop_toTopOf="@id/meeting_room_name_lyt" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/meeting_participants_lyt"
@@ -195,8 +194,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textEmailAddress"
-                    android:hint="Participants" />
+                    android:hint="@string/participants_meeting_hint"
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -222,12 +221,12 @@
         android:clickable="false"
         android:elevation="15dp"
         android:enabled="false"
-        android:text="créer"
+        android:text="@string/create_meeting_button"
         android:textColor="@color/black"
         app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

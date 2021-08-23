@@ -2,7 +2,15 @@
     <string name="app_name">Mareu</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="filterByDate">Filtre par date activé</string>
-    <string name="filterByRoom">Filtre par salle activé</string>
-    <string name="resetFilter">Reset filtre</string>
+    <string name="trierByDate">Tri par date activé</string>
+    <string name="trierByRoom">Tri par salle activé</string>
+    <string name="reset">Reset tri</string>
+    <string name="duration_meeting_input">Durée</string>
+    <string name="room_meeting_spinner">Salle</string>
+    <string name="meeting_subject_hint">Sujet</string>
+    <string name="create_meeting_activity_title">CREATION D\'UNE REUNION</string>
+    <string name="date_meeting_hint">Date</string>
+    <string name="duration_meeting_hint">Horaire</string>
+    <string name="participants_meeting_hint">Participants</string>
+    <string name="create_meeting_button">créer</string>
 </resources>

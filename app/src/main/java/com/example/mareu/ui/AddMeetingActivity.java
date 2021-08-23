@@ -5,13 +5,13 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
+import com.example.mareu.model.Meeting;
+import com.example.mareu.model.Room;
 import com.example.mareu.repository.MeetingRepository;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -29,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +48,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     TextInputEditText mMeetingDuration;
     @BindView(R.id.meeting_room_name)
     TextInputEditText mMeetingRoom;
+    private long mRoomId;
     @BindView(R.id.meeting_participants)
     TextInputEditText mMeetingParticipants;
     @BindView(R.id.meeting_duration_spinner)
@@ -64,12 +68,20 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     //todo initialisation creation meeting (1)
-    private String meetingSubject;
-    private String meetingDate;
-    private String meetingTime;
-    private String meetingDuration = "15min";
-    private String meetingRoom = "cactus";
-    private String meetingParticipants;
+//    private String meetingSubject;
+//    private String meetingDate;
+//    private String meetingTime;
+//    private String meetingDuration = "15min";
+//    private String meetingRoom = "cactus";
+//    private String meetingParticipants;
+    private boolean isSubjectSet = false;
+    private boolean isDateSet = false;
+    private boolean isTimeSet = false;
+    private boolean isDurationSet = false;
+    private boolean isRoomSet = false;
+    private boolean isParticipantsSet = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +108,9 @@ public class AddMeetingActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                meetingSubject = s.toString();
+//              meetingSubject = s.toString();
+                isSubjectSet = s.length() != 0;
                 checkIfValidateAndCreate();
-
             }
         });
 
@@ -106,60 +118,61 @@ public class AddMeetingActivity extends AppCompatActivity {
         mMeetingDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDateDialog(mMeetingDate);
+                isDateSet = true;
+                showDateDialog();
             }
         });
-        mMeetingDate.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                meetingDate = s.toString();
-
-            }
-        });
+//        mMeetingDate.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                meetingDate = s.toString();
+//                isDateSet = true;
+//                setEndCalendar();
+//            }
+//        });
 
         // Time
         mMeetingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTimeDialog(mMeetingTime);
+                isTimeSet = true;
+                showTimeDialog();
             }
         });
-        mMeetingTime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                meetingTime = s.toString();
-            }
-        });
+//        mMeetingTime.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                meetingTime = s.toString();
+//            }
+//        });
 
         // Spinner Duration
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+        ArrayAdapter<CharSequence> durationSpinnerAdapter = ArrayAdapter.createFromResource
                 (this, R.array.meeting_durations_array, R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        mDurationSpinner.setAdapter(adapter);
+        durationSpinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        mDurationSpinner.setAdapter(durationSpinnerAdapter);
         mDurationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mMeetingDurationMillis = (position + 1) * 15;
-                Calendar mEndCalendar = Calendar.getInstance();
-                long meetingEndTimeMillis = mStartCalendar.getTimeInMillis() + mMeetingDurationMillis;
-                mEndCalendar.setTimeInMillis(meetingEndTimeMillis);
-                int booleanCompar = mStartCalendar.compareTo(mEndCalendar);
+                mMeetingDurationMillis = position * 15;
+                isDurationSet = position != 0;
+                setEndCalendar();
             }
 
             @Override
@@ -169,14 +182,18 @@ public class AddMeetingActivity extends AppCompatActivity {
         });
 
         // Spinner Room
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource
-                (this, R.array.meeting_room_array, R.layout.support_simple_spinner_dropdown_item);
-        adapter1.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        mRoomSpinner.setAdapter(adapter1);
+        //todo creation layout and recuperation list room repository
+        List<Room> rooms = new ArrayList<>();
+        rooms.add(new Room(0, "", 0));
+        rooms.addAll(mRepository.getRooms());
+        RoomSpinnerAdapter roomSpinnerAdapter = new RoomSpinnerAdapter(rooms);
+        mRoomSpinner.setAdapter(roomSpinnerAdapter);
         mRoomSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                mRoomId = mRoomSpinner.getSelectedItemId();
+                isRoomSet = position != 0;
+                checkIfValidateAndCreate();
             }
 
             @Override
@@ -200,17 +217,16 @@ public class AddMeetingActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                meetingParticipants = s.toString();
 
             }
         });
-
         mMeetingParticipants.setOnEditorActionListener((v, actionId, event) -> {
             String insertEmailText = v.getText().toString();
             insertEmailText = insertEmailText.replace(" ", "").replace(";", "");
             if (insertEmailText.contains("@") && !insertEmailText.endsWith("@")
                     && insertEmailText.contains(".") && !insertEmailText.endsWith(".")) {
                 mMeetingParticipantsList.add(insertEmailText);
+                isParticipantsSet = true;
                 Chip chip = new Chip(AddMeetingActivity.this);
                 chip.setText(insertEmailText);
                 chip.setCloseIconVisible(true);
@@ -221,6 +237,9 @@ public class AddMeetingActivity extends AppCompatActivity {
                 chip.setOnCloseIconClickListener(v1 -> {
                     mChipGroup.removeView(v1);
                     mMeetingParticipantsList.remove(chip.getText().toString());
+                    if (mMeetingParticipantsList.isEmpty()) {
+                        isParticipantsSet = false;
+                    }
                     checkIfValidateAndCreate();
                 });
                 mChipGroup.addView(chip);
@@ -237,28 +256,44 @@ public class AddMeetingActivity extends AppCompatActivity {
         mCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("créer", "reunion créée");
+                Meeting newMeeting = new Meeting(mRoomId,
+                        Objects.requireNonNull(mMeetingSubject.getText()).toString(),
+                        Objects.requireNonNull(mMeetingDate.getText()).toString(),
+                        Objects.requireNonNull(mMeetingTime.getText()).toString(),
+                        mDurationSpinner.getSelectedItem().toString(),
+                        mMeetingParticipantsList);
+                mRepository.createMeeting(newMeeting);
+                finish();
             }
         });
     }
 
-    private void checkIfValidateAndCreate() {
-        mCreate.setEnabled(meetingSubject != null
-                && meetingDate != null
-                && meetingTime != null
-                && meetingParticipants != null);
+    private void setEndCalendar() {
+        if (isDateSet && isTimeSet && isDurationSet) {
+            Calendar mEndCalendar = Calendar.getInstance();
+            long meetingEndTimeMillis = mStartCalendar.getTimeInMillis() + mMeetingDurationMillis;
+            mEndCalendar.setTimeInMillis(meetingEndTimeMillis);
+        }
+        checkIfValidateAndCreate();
     }
 
-    private void showDateDialog(EditText date) {
+    private void checkIfValidateAndCreate() {
+        mCreate.setEnabled(isSubjectSet && isDateSet && isTimeSet && isDurationSet &&
+                isRoomSet && isParticipantsSet);
+    }
+
+    private void showDateDialog() {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 mStartCalendar.set(Calendar.YEAR, year);
                 mStartCalendar.set(Calendar.MONTH, month);
                 mStartCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
-                date.setText(simpleDateFormat.format(mStartCalendar.getTime()));
-                mMeetingRoom.setText("");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                mMeetingDate.setText(simpleDateFormat.format(mStartCalendar.getTime()));
+                isDateSet = true;
+                setEndCalendar();
             }
         };
 
@@ -267,15 +302,17 @@ public class AddMeetingActivity extends AppCompatActivity {
                         mStartCalendar.get(Calendar.MONTH), mStartCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
-    private void showTimeDialog(EditText time) {
+    private void showTimeDialog() {
         TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 mStartCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 mStartCalendar.set(Calendar.MINUTE, minute);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-                time.setText(simpleDateFormat.format(mStartCalendar.getTime()));
-                mMeetingRoom.setText("");
+                mMeetingTime.setText(simpleDateFormat.format(mStartCalendar.getTime()));
+                isTimeSet = true;
+                setEndCalendar();
+                //mMeetingRoom.setText("");
             }
         };
 

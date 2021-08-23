@@ -26,12 +26,13 @@ import butterknife.ButterKnife;
 
 public class MyMeetingRecyclerViewAdapter extends RecyclerView.Adapter<MyMeetingRecyclerViewAdapter.MeetingViewHolder> {
 
-    private final List<Meeting> mMeetings;
+    private List<Meeting> mMeetings;
     private final List<Room> mRooms;
     private MeetingRepository mRepository = DI.getMeetingRepository();
 
-    public List<Room> getRooms() {
-        return mRooms;
+    public void setMeetings (List<Meeting> meetingList) {
+        mMeetings = meetingList;
+        notifyDataSetChanged();
     }
 
     public MyMeetingRecyclerViewAdapter(List<Meeting> mettings, List<Room> rooms) {

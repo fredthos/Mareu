@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="meeting_durations_array" >
+        <item />
         <item>15mn</item>
         <item>30mn</item>
         <item>45mn</item>
