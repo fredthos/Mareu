@@ -4,12 +4,13 @@ import com.example.mareu.model.Meeting;
 import com.example.mareu.model.Room;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DummyMeetingRepository implements MeetingRepository {
 
     private List<Room> mRooms = DummyMeetingGenerator.generateRooms();
-    private List<Meeting> mMeetings = new ArrayList<>();
+    private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeeting();
 
 
     @Override

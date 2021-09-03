@@ -13,11 +13,11 @@
                 android:id="@+id/Trier_date"
                 android:title="Date" />
             <item
-                android:id="@+id/Trer_room"
+                android:id="@+id/Trier_room"
                 android:title="MeetingRoom"/>
             <item
                 android:id="@+id/Reset"
-                android:title="Reset list"/>
+                android:title="Reset tri"/>
 
         </menu>
     </item>

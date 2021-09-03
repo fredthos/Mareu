@@ -11,16 +11,16 @@ import java.util.List;
 public abstract class DummyMeetingGenerator {
 
     public static List<Room> DUMMY_ROOMS = Arrays.asList(
-            new Room(1, "Tipunch", R.drawable.tipunch),
-            new Room(2, "Planteur", R.drawable.planteur),
-            new Room(3, "Mojito", R.drawable.mojito),
+            new Room(1, "Brasilia", R.drawable.brasilia),
+            new Room(2, "Cactus", R.drawable.cactus),
+            new Room(3, "Caipirinha", R.drawable.caipirinha),
             new Room(4, "Cubalibre", R.drawable.cubalibre),
-            new Room(5, "Cactus", R.drawable.cactus),
+            new Room(5, "Daiquiri", R.drawable.daiquiri),
             new Room(6, "Maitai", R.drawable.maitai),
-            new Room(7, "Daiquiri", R.drawable.daiquiri),
-            new Room(8, "Caipirinha", R.drawable.caipirinha),
-            new Room(9, "Pinacolada", R.drawable.pinacolada),
-            new Room(10, "Brasilia", R.drawable.brasilia)
+            new Room(7, "Mojito", R.drawable.mojito),
+            new Room(8, "Pinacolada", R.drawable.pinacolada),
+            new Room(9, "Planteur", R.drawable.planteur),
+            new Room(10, "Tipunch", R.drawable.tipunch)
     );
 
     public static List<Meeting> DUMMY_FAKE_MEETING = Arrays.asList(

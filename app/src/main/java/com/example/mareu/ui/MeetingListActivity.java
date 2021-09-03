@@ -14,12 +14,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mareu.R;
 import com.example.mareu.di.DI;
 import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.model.Room;
+import com.example.mareu.repository.DummyMeetingGenerator;
 import com.example.mareu.repository.MeetingRepository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,8 +30,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Comparator;
 import java.util.List;
-
-import static com.example.mareu.repository.DummyMeetingGenerator.DUMMY_FAKE_MEETING;
 
 public class MeetingListActivity extends AppCompatActivity {
 
@@ -63,7 +63,7 @@ public class MeetingListActivity extends AppCompatActivity {
             adapter.setMeetings(mMeetings);
             Toast.makeText(this, R.string.trierByDate, Toast.LENGTH_SHORT).show();
             return true;
-        } else if (itemId == R.id.Trer_room) {
+        } else if (itemId == R.id.Trier_room) {
             mMeetings = mMeetingRepository.getMeetings();
             mMeetings.sort(new Comparator<Meeting>() {
                 @Override
@@ -76,8 +76,9 @@ public class MeetingListActivity extends AppCompatActivity {
             return true;
         } else if (itemId == R.id.Reset) {
             mMeetings = mMeetingRepository.getMeetings();
+            //mMeetings.clear();
+            //mMeetings.addAll(mMeetings);
             adapter.setMeetings(mMeetings);
-            //adapter.get
             Toast.makeText(this, R.string.reset, Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -109,7 +110,7 @@ public class MeetingListActivity extends AppCompatActivity {
     public void initList() {
         mMeetings = mMeetingRepository.getMeetings();
         mRooms = mMeetingRepository.getRooms();
-        mMeetings.addAll(DUMMY_FAKE_MEETING);
+        //mMeetings.addAll(DUMMY_FAKE_MEETING);
         adapter = new MyMeetingRecyclerViewAdapter(mMeetings, mRooms);
         mRecyclerView.setAdapter(adapter);
     }
