@@ -29,8 +29,24 @@ public interface MeetingRepository {
 
 
     /**
-     * Delete Meeting
+     * Create Meeting
      * @param meeting create meeting
      */
     void createMeeting(Meeting meeting);
+
+    /**
+     *
+     * @param date
+     * @return meeting list filter by date
+     */
+    List<Meeting> filterByDate(String date);
+
+    /**
+     *
+     * @param room
+     * @return meeting list filter by room
+     */
+    List<Meeting> filterByRoom(Room room);
+
+
 }

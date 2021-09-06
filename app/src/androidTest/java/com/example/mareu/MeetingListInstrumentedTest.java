@@ -90,5 +90,11 @@ public class MeetingListInstrumentedTest {
         onView(ViewMatchers.withId(R.id.list_meetings)).check(withMeetingCount(ITEMS_COUNT - 1));
     }
 
+    //@Test
+    // Todo ajout reunion
+
+    //@Test
+    // Todo test par filtre
+
 
 }
