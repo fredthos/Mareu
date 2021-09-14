@@ -11,6 +11,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 import com.example.mareu.di.DI;
 import com.example.mareu.repository.MeetingRepository;
@@ -46,28 +47,28 @@ public class MeetingListInstrumentedTest {
 
     private static int ITEMS_COUNT = 5;
 
-    private ActivityScenario<MeetingListActivity> mActivity;
+    private MeetingListActivity mActivity;
     private MeetingRepository mMeetingRepository;
 
     @Rule
-    public ActivityScenarioRule<MeetingListActivity> mActivityScenarioRule =
-            new ActivityScenarioRule(MeetingListActivity.class);
+    public ActivityTestRule<MeetingListActivity> mActivityScenarioRule =
+            new ActivityTestRule<>(MeetingListActivity.class);
 
     @Before
     public void setup() {
-        mActivity = mActivityScenarioRule.getScenario();
+        mActivity = mActivityScenarioRule.getActivity();
         assertThat(mActivity, notnullValue());
         mMeetingRepository = DI.getNewInstanceMeetingRepository();
 
     }
 
-    private void assertThat(ActivityScenario<MeetingListActivity> activity, Object notnullValue) {
+    private void assertThat(MeetingListActivity activity, Object notnullValue) {
     }
 
     private Object nullValue() {
         return new IsNull();
     }
-    
+
     private Object notnullValue() {
         return IsNot.not(nullValue());
     }

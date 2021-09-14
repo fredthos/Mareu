@@ -68,12 +68,6 @@ public class AddMeetingActivity extends AppCompatActivity {
 
 
     //todo initialisation creation meeting (1)
-//    private String meetingSubject;
-//    private String meetingDate;
-//    private String meetingTime;
-//    private String meetingDuration = "15min";
-//    private String meetingRoom = "cactus";
-//    private String meetingParticipants;
     private boolean isSubjectSet = false;
     private boolean isDateSet = false;
     private boolean isTimeSet = false;
@@ -122,22 +116,6 @@ public class AddMeetingActivity extends AppCompatActivity {
                 showDateDialog();
             }
         });
-//        mMeetingDate.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                meetingDate = s.toString();
-//                isDateSet = true;
-//                setEndCalendar();
-//            }
-//        });
 
         // Time
         mMeetingTime.setOnClickListener(new View.OnClickListener() {
@@ -147,20 +125,6 @@ public class AddMeetingActivity extends AppCompatActivity {
                 showTimeDialog();
             }
         });
-//        mMeetingTime.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                meetingTime = s.toString();
-//            }
-//        });
 
         // Spinner Duration
         ArrayAdapter<CharSequence> durationSpinnerAdapter = ArrayAdapter.createFromResource
@@ -182,7 +146,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         });
 
         // Spinner Room
-        //todo creation layout and recuperation list room repository
         List<Room> rooms = new ArrayList<>();
         rooms.add(new Room(0, "", 0));
         rooms.addAll(mRepository.getRooms());

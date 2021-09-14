@@ -71,23 +71,18 @@ public class DummyMeetingRepository implements MeetingRepository {
     }
 
     /**
-     * @param room
+     * @param roomId
      * @return meeting list filter by room
      */
     @Override
-    public List<Meeting> filterByRoom(Room room) {
-        return null;
-    }
-
-//    @Override
-//    public List<Meeting> filterByRoom(Room room) {
-//        List<Meeting> filteredMeetings = new ArrayList<>();
-//        for (int i = 0; i < mMeetings.size(); i++) {
-//            Meeting m = mMeetings.get(i);
-//            if (m.getMeetingRoom() == room) {
-//                filteredMeetings.add(m);
-//            }
-//        }
-//        return filteredMeetings;
-//    }
+    public List<Meeting> filterByRoom(long roomId) {
+        List<Meeting> filteredMeetings = new ArrayList<>();
+        for (int i = 0; i < mMeetings.size(); i++) {
+            Meeting m = mMeetings.get(i);
+           if (m.getMeetingRoomId() == roomId) {
+               filteredMeetings.add(m);
+            }
+        }
+        return filteredMeetings;
+   }
 }

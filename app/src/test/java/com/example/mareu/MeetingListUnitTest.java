@@ -2,6 +2,7 @@ package com.example.mareu;
 
 import com.example.mareu.di.DI;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.model.Room;
 import com.example.mareu.repository.DummyMeetingGenerator;
 import com.example.mareu.repository.MeetingRepository;
 import com.example.mareu.ui.MeetingListActivity;
@@ -31,7 +32,6 @@ public class MeetingListUnitTest {
     @Before
     public void setup() {
         mRepository = DI.getMeetingRepository();
-        mRepository.getMeetings().clear();
 
     }
 
@@ -65,11 +65,15 @@ public class MeetingListUnitTest {
         for (Meeting m : meetings){
             assertTrue(m.getMeetingDate(), equals(filterDate));
         }
-
     }
 
     @Test
     public void filterMeetingByRoomWithSuccess() {
-
+        List<Meeting> meetings =new ArrayList<>();
+        Room filterRoom = mRepository.getRooms().get(1);
+        meetings.addAll(mRepository.filterByRoom(filterRoom.getId()));
+        for (Meeting m : meetings){
+            assertTrue(false);
+        }
     }
 }

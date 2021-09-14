@@ -46,7 +46,7 @@ public interface MeetingRepository {
      * @param room
      * @return meeting list filter by room
      */
-    List<Meeting> filterByRoom(Room room);
+    List<Meeting> filterByRoom(long roomId);
 
 
 }

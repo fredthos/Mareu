@@ -4,20 +4,21 @@
 
     <item
         android:id="@+id/menu_mareu"
-        android:title="Menu"
-        android:orderInCategory="100"
-        app:showAsAction="never">
+        android:orderInCategory="0"
+        app:showAsAction="ifRoom"
+        android:title="Filtres"
+        android:icon="@drawable/ic_baseline_menu_24">
 
         <menu>
             <item
-                android:id="@+id/Trier_date"
-                android:title="Date" />
+                android:id="@+id/Filter_date"
+                android:title="Filter by Date" />
             <item
-                android:id="@+id/Trier_room"
-                android:title="MeetingRoom"/>
+                android:id="@+id/Filter_room"
+                android:title="Filter by MeetingRoom"/>
             <item
-                android:id="@+id/Reset"
-                android:title="Reset tri"/>
+                android:id="@+id/Reset_Filtre"
+                android:title="Reset Filter"/>
 
         </menu>
     </item>
