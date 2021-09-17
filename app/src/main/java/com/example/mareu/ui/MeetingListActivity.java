@@ -74,7 +74,7 @@ public class MeetingListActivity extends AppCompatActivity {
         } else if (itemId == R.id.Reset_Filtre) {
             mMeetings = mMeetingRepository.getMeetings();
             adapter.setMeetings(mMeetings);
-            Toast.makeText(this, R.string.resetFilter, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.reset_filter, Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -94,7 +94,7 @@ public class MeetingListActivity extends AppCompatActivity {
             long selectedRoomId = selectedRoom.getId();
             List<Meeting> filteredList = mMeetingRepository.filterByRoom(selectedRoomId);
             adapter.setMeetings(filteredList);
-            Toast.makeText(getApplicationContext(), R.string.filterByRoom, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.filter_by_meetingroom, Toast.LENGTH_SHORT).show();
             roomDialog = null;
             mRoomSpinner = null;
         });
@@ -121,7 +121,7 @@ public class MeetingListActivity extends AppCompatActivity {
                 selectedDate = simpleDateFormat.format(mCalendar.getTime());
                 List<Meeting> filteredList = mMeetingRepository.filterByDate(selectedDate);
                 adapter.setMeetings(filteredList);
-                Toast.makeText(getApplicationContext(), R.string.filterByDate, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.filter_by_date, Toast.LENGTH_SHORT).show();
             }
         };
 

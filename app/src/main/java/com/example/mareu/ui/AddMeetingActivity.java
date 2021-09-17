@@ -275,7 +275,6 @@ public class AddMeetingActivity extends AppCompatActivity {
                 mMeetingTime.setText(simpleDateFormat.format(mStartCalendar.getTime()));
                 isTimeSet = true;
                 setEndCalendar();
-                //mMeetingRoom.setText("");
             }
         };
 

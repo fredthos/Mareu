@@ -6,19 +6,19 @@
         android:id="@+id/menu_mareu"
         android:orderInCategory="0"
         app:showAsAction="ifRoom"
-        android:title="Filtres"
+        android:title="@string/filtres"
         android:icon="@drawable/ic_baseline_menu_24">
 
         <menu>
             <item
                 android:id="@+id/Filter_date"
-                android:title="Filter by Date" />
+                android:title="@string/filter_by_date" />
             <item
                 android:id="@+id/Filter_room"
-                android:title="Filter by MeetingRoom"/>
+                android:title="@string/filter_by_meetingroom"/>
             <item
                 android:id="@+id/Reset_Filtre"
-                android:title="Reset Filter"/>
+                android:title="@string/reset_filter"/>
 
         </menu>
     </item>
