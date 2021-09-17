@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -28,6 +29,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.mareu.utils.RecyclerViewItemCountAssertion.withItemCount;
 
@@ -40,6 +42,7 @@ import static com.example.mareu.utils.RecyclerViewItemCountAssertion.withItemCou
 public class MeetingListInstrumentedTest {
 
     private static int ITEMS_COUNT = 5;
+    private static final String TEST_CREATE_MEETING = "Reunion test";
     private static final String TEST_DATE_MEETING = "17/09/2021";
     private static final String TEST_TIME_MEETING = "7:20";
     private static final String TEST_DURATION_MEETING = "1h";
@@ -47,7 +50,6 @@ public class MeetingListInstrumentedTest {
 
     private MeetingListActivity mActivity;
     private MeetingRepository mMeetingRepository;
-    private String TEST_CREATE_MEETING = "Reunion test";
     private Calendar mCalendar;
 
     @Rule
@@ -125,12 +127,12 @@ public class MeetingListInstrumentedTest {
         onView(withId(R.id.meeting_duration_spinner)).perform(click());
         onView(withText(TEST_DURATION_MEETING)).check(matches(isDisplayed()));
         onView(withText(TEST_DURATION_MEETING)).perform(click());
-        onView(withId(R.id.meeting_duration_spinner)).check(matches(isDisplayed()));
+        onView(withId(R.id.meeting_duration_spinner)).check(matches(withSpinnerText(TEST_DURATION_MEETING)));
         // When : Complete Meeting Room
         onView(withId(R.id.meeting_room_spinner)).perform(click());
         onView(withText(TEST_ROOM_MEETING)).check(matches(isDisplayed()));
         onView(withText(TEST_ROOM_MEETING)).perform(click());
-        onView(withId(R.id.meeting_room_spinner)).check(matches(isDisplayed()));
+        onView(withId(R.id.meeting_room_spinner)).check(matches(withSpinnerText(TEST_ROOM_MEETING)));
         // When : Complete Meeting Participants
         onView(withId(R.id.meeting_participants)).perform(click());
         onView(withId(R.id.meeting_participants))
@@ -154,7 +156,6 @@ public class MeetingListInstrumentedTest {
         onView(withContentDescription(R.string.filtres)).perform(click());
         onView(withText(R.string.filter_by_date)).perform(click());
         // When : Selected Date
-        mCalendar = Calendar.getInstance();
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.recycler_view_meeting)).check(matches(isDisplayed()));
         // Then : Check mmeeting with date selected
