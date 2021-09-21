@@ -24,16 +24,16 @@ public abstract class DummyMeetingGenerator {
     );
 
     public static List<Meeting> DUMMY_FAKE_MEETING = Arrays.asList(
-            new Meeting(1, "Soutenance", "10/09/2021",
+            new Meeting(1, "Soutenance", "20/09/2021",
                     "10:00", "1h",
                     Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com")),
-            new Meeting(5, "Reunion d'equipe", "17/09/2021",
+            new Meeting(5, "Reunion d'equipe", "23/09/2021",
                     "8:00", "30min",
                     Arrays.asList("jack@lamzone.com","viviane@lamzone.com","seb@lamzone.com","achraf@lamzone.com")),
             new Meeting(6, "Reunion d'information", "22/09/2021",
                     "11:00", "1h30",
                     Arrays.asList("denis@lamzone.com","marie@lamzone.com","sophie@lamzone.com","milena@lamzone.com")),
-            new Meeting(2, "Soutenance", "18/09/2021",
+            new Meeting(2, "Soutenance", "21/09/2021",
                     "15:00", "15min",
                     Arrays.asList("alex@lamzone.com","fabien@lamzone.com","maelle@lamzone.com","awatef@lamzone.com")),
             new Meeting(6, "Reunion d'equipe", "29/09/2021",

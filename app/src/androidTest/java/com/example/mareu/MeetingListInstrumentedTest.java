@@ -15,8 +15,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -43,8 +45,8 @@ public class MeetingListInstrumentedTest {
 
     private static int ITEMS_COUNT = 5;
     private static final String TEST_CREATE_MEETING = "Reunion test";
-    private static final String TEST_DATE_MEETING = "17/09/2021";
-    private static final String TEST_TIME_MEETING = "7:20";
+    private static final String TEST_DATE_MEETING = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).format(new Date());
+    private static final String TEST_TIME_MEETING = new SimpleDateFormat("HH:mm", Locale.FRANCE).format(new Date());
     private static final String TEST_DURATION_MEETING = "1h";
     private static final String TEST_ROOM_MEETING = "Mojito";
 
@@ -87,11 +89,37 @@ public class MeetingListInstrumentedTest {
     public void myMeetingList_deleteAction_shouldRemoveItem() {
         // Given : We remove the element at position 2
         onView(withId(R.id.recycler_view_meeting)).check(withItemCount(ITEMS_COUNT));
-        // When perform a click on a delete icon
+        // When : Perform a click on a delete icon
         onView(withId(R.id.recycler_view_meeting))
                 .perform(actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element is 4
+        // When : The number of element is 4
         onView(withId(R.id.recycler_view_meeting)).check(withItemCount(ITEMS_COUNT - 1));
+        // Then : Reset ITEMS Count = 5
+        onView(withId(R.id.create_meeting)).perform(click());
+        onView(withId(R.id.meeting_subject)).perform(click());
+        onView(withId(R.id.meeting_subject)).perform(typeTextIntoFocusedView("Reunion test"), closeSoftKeyboard(), pressImeActionButton());
+        onView(withId(R.id.meeting_subject)).check(matches(withText(TEST_CREATE_MEETING)));
+        onView(withId(R.id.meeting_date)).perform(click());
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.meeting_date)).check(matches(withText(TEST_DATE_MEETING)));
+        onView(withId(R.id.meeting_time)).perform(click());
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(R.id.meeting_time)).check(matches(withText(TEST_TIME_MEETING)));
+        onView(withId(R.id.meeting_duration_spinner)).perform(click());
+        onView(withText(TEST_DURATION_MEETING)).check(matches(isDisplayed()));
+        onView(withText(TEST_DURATION_MEETING)).perform(click());
+        onView(withId(R.id.meeting_duration_spinner)).check(matches(withSpinnerText(TEST_DURATION_MEETING)));
+        onView(withId(R.id.meeting_room_spinner)).perform(click());
+        onView(withText(TEST_ROOM_MEETING)).check(matches(isDisplayed()));
+        onView(withText(TEST_ROOM_MEETING)).perform(click());
+        onView(withId(R.id.meeting_room_spinner)).check(matches(withSpinnerText(TEST_ROOM_MEETING)));
+        onView(withId(R.id.meeting_participants)).perform(click());
+        onView(withId(R.id.meeting_participants)).perform(typeTextIntoFocusedView("fred@lamzone.com"), closeSoftKeyboard(), pressImeActionButton());
+        onView(withId(R.id.meeting_participants)).perform(typeTextIntoFocusedView("jean@lamzone.com"), closeSoftKeyboard(), pressImeActionButton());
+        onView(withId(R.id.meeting_participants)).perform(typeTextIntoFocusedView("steph@lamzone.com"), closeSoftKeyboard(), pressImeActionButton());
+        onView(withId(R.id.meeting_participants)).check(matches(isDisplayed()));
+        onView(withId(R.id.create)).perform(click());
+        onView(withId(R.id.recycler_view_meeting)).check(withItemCount(ITEMS_COUNT));
     }
 
     @Test
@@ -122,7 +150,7 @@ public class MeetingListInstrumentedTest {
         // When : Complete Meeting time
         onView(withId(R.id.meeting_time)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
-        onView(withId(R.id.meeting_time)).check(matches(isDisplayed()));
+        onView(withId(R.id.meeting_time)).check(matches(withText(TEST_TIME_MEETING)));
         // When : Complete Meeting duration
         onView(withId(R.id.meeting_duration_spinner)).perform(click());
         onView(withText(TEST_DURATION_MEETING)).check(matches(isDisplayed()));
@@ -137,6 +165,9 @@ public class MeetingListInstrumentedTest {
         onView(withId(R.id.meeting_participants)).perform(click());
         onView(withId(R.id.meeting_participants))
                 .perform(typeTextIntoFocusedView("fred@lamzone.com")
+                        , closeSoftKeyboard(), pressImeActionButton());
+        onView(withId(R.id.meeting_participants))
+                .perform(typeTextIntoFocusedView("jean@lamzone.com")
                         , closeSoftKeyboard(), pressImeActionButton());
         onView(withId(R.id.meeting_participants))
                 .perform(typeTextIntoFocusedView("jean@lamzone.com")
@@ -159,7 +190,7 @@ public class MeetingListInstrumentedTest {
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.recycler_view_meeting)).check(matches(isDisplayed()));
         // Then : Check mmeeting with date selected
-        onView(withId(R.id.recycler_view_meeting)).check(withItemCount(1));
+        onView(withId(R.id.recycler_view_meeting)).check(withItemCount(2));
     }
 
 
